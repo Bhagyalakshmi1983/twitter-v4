@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Sidebar from '../Components/Sidebar';
 
 
 
@@ -11,7 +12,18 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-<h1>Hello World</h1>
+      <main className='flex min-h-screen max-w-7xl mx-auto'>
+      {/* Sidebar */}
+        <Sidebar />
+
+      {/* Feed */}
+
+      {/* Widjets */}
+
+      {/* Modal */}
+
+
+      </main>
     </div>
   )
 }
