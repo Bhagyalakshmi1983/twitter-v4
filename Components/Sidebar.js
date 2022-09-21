@@ -38,9 +38,8 @@ export default function Sidebar() {
 
       <div className="hoverEffect text-gray-700 flex items-center justify-center xl:justify-start mt-auto">
         <img
-          className="rounded-full xl:mr-2"
-          width="50"
-          height="50"
+          className=" w-16 h-16 rounded-full xl:mr-2"
+
           src="/Images/APZE5774.JPG" alt="user-image" />
         <div className="leading-5 hidden xl:inline">
           <h4 className="font-bold">Bhagyalakshmi</h4>
