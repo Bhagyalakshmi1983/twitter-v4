@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Feed from '../Components/Feed';
 import Sidebar from '../Components/Sidebar';
 
 
@@ -17,7 +18,8 @@ export default function Home() {
         <Sidebar />
 
       {/* Feed */}
-
+        <Feed />
+        
       {/* Widjets */}
 
       {/* Modal */}
