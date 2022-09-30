@@ -22,7 +22,8 @@ export default function Home({newsResults,randomUserResults}) {
         <Feed />
 
       {/* Widjets */}
-        <Widgets newsResults={newsResults.articles} randomUserResults={randomUserResults.results} />
+        <Widgets newsResults={newsResults?.articles}
+          randomUserResults={randomUserResults?.results} />
 
       {/* Modal */}
 

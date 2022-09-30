@@ -6,8 +6,10 @@ import {
   HashtagIcon, BellIcon, InboxIcon, BookmarkIcon, ClipboardIcon, UserIcon,
   EllipsisHorizontalIcon, EllipsisHorizontalCircleIcon
 } from "@heroicons/react/24/outline"
+import { useSession,signIn, signOut } from "next-auth/react";
 
 export default function Sidebar() {
+  const { data: session } = useSession();
   return (
     <div className="hidden sm:flex flex-col p-2 xl:items-start fixed h-full xl:ml-24">
 
@@ -18,35 +20,50 @@ export default function Sidebar() {
           height="50"
           src="https://help.twitter.com/content/dam/help-twitter/brand/logo.png">
         </Image>
-</div>
+      </div>
       {/* Menu */}
       <div className="mt-4 mb-2.5 xl:items-start">
-        <SidebarMenuItem text="Home" Icon={HomeIcon} active/>
+        <SidebarMenuItem text="Home" Icon={HomeIcon} active />
         <SidebarMenuItem text="Explore" Icon={HashtagIcon} />
-        <SidebarMenuItem text="Notifications" Icon={BellIcon} />
-        <SidebarMenuItem text="Messages" Icon={InboxIcon} />
-        <SidebarMenuItem text="BookMark" Icon={BookmarkIcon} />
-        <SidebarMenuItem text="Lists" Icon={ClipboardIcon} />
-        <SidebarMenuItem text="Profile" Icon={UserIcon} />
-        <SidebarMenuItem text="More" Icon={EllipsisHorizontalCircleIcon} />
-</div>
+        {session && (
+          <>
+            <SidebarMenuItem text="Notifications" Icon={BellIcon} />
+            <SidebarMenuItem text="Messages" Icon={InboxIcon} />
+            <SidebarMenuItem text="BookMark" Icon={BookmarkIcon} />
+            <SidebarMenuItem text="Lists" Icon={ClipboardIcon} />
+            <SidebarMenuItem text="Profile" Icon={UserIcon} />
+            <SidebarMenuItem text="More" Icon={EllipsisHorizontalCircleIcon} />
+          </>
+
+        )}
+
+      </div>
       {/* Button */}
 
-      <button className="bg-blue-400 text-white rounded-full w-56 h-12 font-bold shadow-md hover:brightness-95 text-lg hidden xl:inline">Tweet</button>
+      {session ? (
+        <>
+          <button className="bg-blue-400 text-white rounded-full w-56 h-12 font-bold shadow-md hover:brightness-95 text-lg hidden xl:inline">Tweet</button>
 
-      {/* Mini - Profile */}
+          {/* Mini - Profile */}
 
-      <div className="hoverEffect text-gray-700 flex items-center justify-center xl:justify-start mt-auto">
-        <img
-          className=" w-16 h-16 rounded-full xl:mr-2"
+          <div className="hoverEffect text-gray-700 flex items-center justify-center xl:justify-start mt-auto">
+            <img
+              onClick={signOut}
+              className=" w-16 h-16 rounded-full xl:mr-2"
+              src="/Images/APZE5774.JPG" alt="user-image" />
+            <div className="leading-5 hidden xl:inline">
+              <h4 className="font-bold">{session?.user?.name}</h4>
+              <p className="text-gray-500">@{session?.user?.username}</p>
+            </div>
+            <EllipsisHorizontalIcon className="h-5 xl:ml-8" />
+          </div>
+        </>
+      ) :(
+          <button
+            onClick={signIn}
+            className="bg-blue-400 text-white rounded-full w-36 h-12 font-bold shadow-md hover:brightness-95 text-lg hidden xl:inline">Signin</button>
+      )}
 
-          src="/Images/APZE5774.JPG" alt="user-image" />
-        <div className="leading-5 hidden xl:inline">
-          <h4 className="font-bold">Bhagyalakshmi</h4>
-          <p className="text-gray-500">@codewithBhagya</p>
-        </div>
-        <EllipsisHorizontalIcon  className="h-5 xl:ml-8"/>
-      </div>
     </div>
-  )
+  );
 }
